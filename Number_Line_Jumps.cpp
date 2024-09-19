@@ -7,39 +7,46 @@ string rtrim(const string &);
 vector<string> split(const string &);
 
 /*
- * Complete the 'simpleArraySum' function below.
+ * Complete the 'kangaroo' function below.
  *
- * The function is expected to return an INTEGER.
- * The function accepts INTEGER_ARRAY ar as parameter.
+ * The function is expected to return a STRING.
+ * The function accepts following parameters:
+ *  1. INTEGER x1
+ *  2. INTEGER v1
+ *  3. INTEGER x2
+ *  4. INTEGER v2
  */
 
-int simpleArraySum(vector<int> ar) {
-
+string kangaroo(int x1, int v1, int x2, int v2) {
+    if ((v1 > v2 && (x2 - x1) % (v1 - v2) == 0 && x1 < x2) || (v2 > v1 && (x1 - x2) % (v2 - v1) == 0 && x2 < x1)) {
+        return "YES";
+    } 
+    else if (x1 == x2 && v1 == v2) {
+        return "YES";
+    }
+    return "NO";
 }
+
+
 
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    string ar_count_temp;
-    getline(cin, ar_count_temp);
+    string first_multiple_input_temp;
+    getline(cin, first_multiple_input_temp);
 
-    int ar_count = stoi(ltrim(rtrim(ar_count_temp)));
+    vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
 
-    string ar_temp_temp;
-    getline(cin, ar_temp_temp);
+    int x1 = stoi(first_multiple_input[0]);
 
-    vector<string> ar_temp = split(rtrim(ar_temp_temp));
+    int v1 = stoi(first_multiple_input[1]);
 
-    vector<int> ar(ar_count);
+    int x2 = stoi(first_multiple_input[2]);
 
-    for (int i = 0; i < ar_count; i++) {
-        int ar_item = stoi(ar_temp[i]);
+    int v2 = stoi(first_multiple_input[3]);
 
-        ar[i] = ar_item;
-    }
-
-    int result = simpleArraySum(ar);
+    string result = kangaroo(x1, v1, x2, v2);
 
     fout << result << "\n";
 
